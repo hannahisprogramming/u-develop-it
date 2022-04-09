@@ -1,6 +1,5 @@
 const mysql = require('mysql2');
 const express = require('express');
-const { isBuffer, result } = require('lodash');
 const PORT = process.env.PORT || 3001;
 const app = express();
 
@@ -22,9 +21,20 @@ const db = mysql.createConnection(
 )
 
 //queries
-// db.query(`SELECT * FROM candidates`, (err, rows) => {
-//   console.log(rows);
-// });
+app.get('/api/candidates', (req, res) => {
+  const sql = `SELECT * FROM candidates`;
+
+  db.query(sql, (err, rows) => {
+    if (err) {
+      res.status(500).json({error: err.message});
+      return;
+    }
+    res.json({
+      message: 'success',
+      data: rows,
+    });
+  });
+});
 
 //GET single candidate
 // db.query(`SELECT * FROM candidates WHERE id = 1`, (err, row) => {
