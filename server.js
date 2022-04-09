@@ -1,3 +1,4 @@
+const mysql = require('mysql2');
 const express = require('express');
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -5,6 +6,19 @@ const app = express();
 //express middleware
 app.use(express.urlencoded({ extended:false}));
 app.use(express.json());
+
+//Connect to db
+const db = mysql.createConnection(
+  {
+    host: 'localhost',
+    //mysql username
+    user: 'root',
+    //mysql password
+    password: 'password',
+    database: 'election'
+  },
+  console.log('Connected to the election db.')
+)
 
 //must be last; Default response for any route Not Found
 app.use((req, res) => {
