@@ -20,6 +20,11 @@ const db = mysql.createConnection(
   console.log('Connected to the election db.')
 )
 
+//queries
+db.query(`SELECT * FROM candidates`, (err, rows) => {
+  console.log(rows);
+});
+
 //must be last; Default response for any route Not Found
 app.use((req, res) => {
   res.status(404).end();
