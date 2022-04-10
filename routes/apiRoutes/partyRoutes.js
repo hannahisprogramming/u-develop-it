@@ -56,4 +56,5 @@ app.delete('/party/:id', (req, res) => {
   });
 });
 
+//send out
 module.exports = router;
